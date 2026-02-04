@@ -1,28 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Will You Be My Valentine?</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Great+Vibes&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Will You Be My Valentine?</title>
+<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Great+Vibes&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <div class="love-watermark"></div>
-        <h1 class="title">
-            <span class="valentine">Etieno Isang,</span><br>
-            <span class="question">Will you be my</span><br>
-            <span class="valentine">Valentine?</span>
-          </h1>          
-        <div class="buttons">
-            <button class="yes-button" onclick="handleYesClick()">Yes</button>
-            <button class="no-button" onclick="handleNoClick()">No</button>
-        </div>
-        <div class="image_container">
-            <img src="IMG_4227.jpg" alt="Cute Image" class="shake-image">
-          </div>          
-    </div>
-    <script src="script.js"></script>
+<div class="container">
+  <div class="love-watermark"></div>
+  
+  <h1 class="title">
+    <span class="valentine">Etieno Lilian Isang,</span><br>
+    <span class="question">Will you be my</span><br>
+    <span class="valentine">Valentine?</span>
+  </h1>          
+
+  <div class="buttons">
+    <button class="yes-button" onclick="handleYesClick()">Yes</button>
+    <button class="no-button" onclick="handleNoClick()">No</button>
+  </div>
+
+  <div class="image_container">
+    <img src="IMG_4227.jpg" alt="Cute Image" class="shake-image">
+  </div>
+
+  <!-- Audio element (hidden) -->
+  <audio id="love-audio" loop style="display:none;">
+    <source src="love-on-the-brain.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>                    
+</div>
+
+<!-- Scripts -->
+<script src="script.js"></script>
+
+<!-- Autoplay script starting at 1:10 -->
+<script>
+  const audio = document.getElementById('love-audio');
+
+  // Start at 1 minute 10 seconds (70 seconds)
+  audio.currentTime = 10;
+
+  // Try to play immediately
+  audio.play().catch(() => {
+    // Mobile autoplay workaround: play on first click/tap
+    document.addEventListener('click', () => {
+      audio.play().catch(err => console.log("Autoplay blocked:", err));
+    }, { once: true });
+  });
+</script>
+
 </body>
 </html>

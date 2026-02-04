@@ -4,30 +4,69 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Knew you would say yes!</title>
-
+<link rel="stylesheet" href="yes_style.css">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Great+Vibes&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./yes_style.css">
 </head>
 <body>
-  <div class="container">
-    <h1 class="header_text">I knew you’d say yes 💖</h1>
 
-    <p class="sub_text">
-      You just made my heart happy.<br>
-    </p>
+<div class="container">
+  <h1 class="header_text">I knew you’d say yes 💖</h1>
 
-    <div class="image_container">
-      <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjE3cmZkNnAxNzNjbW04d2E2bW1uMHVqcmFmaWIyZGR4dnhpb2NuZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ANjMpBvC9LeRUopsoU/giphy.gif" alt="Celebration">
-    </div>
+  <p class="sub_text">
+    You just made my heart happy.<br>
+  </p>
 
-    <p class="date_text">
-      📅 So… laughter, and memories? 😏
-    </p>
+  <div class="image_container">
+    <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjE3cmZkNnAxNzNjbW04d2E2bW1uMHVqcmFmaWIyZGR4dnhpb2NuZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ANjMpBvC9LeRUopsoU/giphy.gif" alt="Celebration">
   </div>
 
-  <!-- falling hearts -->
-  <div class="hearts-container"></div>
+  <p class="date_text">
+    📅 So… laughter, and memories? 😏
+  </p>
+</div>
 
-  <script src="yes_script.js"></script>
+<!-- Falling hearts container -->
+<div class="hearts-container"></div>
+
+<!-- Hidden audio element -->
+<audio id="love-audio" loop style="display:none;">
+  <source src="love-on-the-brain.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+<!-- Floating music icon -->
+<div id="music-icon" title="Love on the Brain 🎵">❤️</div>
+
+<script src="yes_script.js"></script>
+<script>
+  const audio = document.getElementById('love-audio');
+  const musicIcon = document.getElementById('music-icon');
+
+  // Resume from last saved position or start at 1:10
+  const savedTime = localStorage.getItem('loveAudioTime');
+  audio.currentTime = savedTime ? savedTime : 10;
+
+  // Play audio with mobile fallback
+  audio.play().catch(() => {
+    document.addEventListener('click', () => audio.play(), { once: true });
+  });
+
+  // Save current time continuously
+  audio.addEventListener('timeupdate', () => {
+    localStorage.setItem('loveAudioTime', audio.currentTime);
+  });
+
+  // Toggle audio on icon click
+  musicIcon.addEventListener('click', () => {
+    if(audio.paused){
+      audio.play();
+      musicIcon.style.backgroundColor = "#d32f2f";
+    } else {
+      audio.pause();
+      musicIcon.style.backgroundColor = "#888";
+    }
+  });
+</script>
+
 </body>
 </html>
